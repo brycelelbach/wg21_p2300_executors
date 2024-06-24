@@ -74,6 +74,10 @@ set(stdexec_test_sources
     exec/test_on3.cpp
     exec/test_repeat_effect_until.cpp
     exec/test_repeat_n.cpp
+    exec/async_object/test_async_tuple.cpp
+    exec/async_object/test_stop_object0.cpp
+    exec/async_object/test_stop_object1.cpp
+    exec/async_object/test_stop_object2.cpp
     exec/async_scope/test_dtor.cpp
     exec/async_scope/test_spawn.cpp
     exec/async_scope/test_spawn_future.cpp
@@ -102,6 +106,8 @@ set_target_properties(test.stdexec PROPERTIES
     CXX_STANDARD_REQUIRED ON
     CXX_EXTENSIONS OFF)
 target_include_directories(test.stdexec PRIVATE ${CMAKE_CURRENT_LIST_DIR})
+target_compile_options(test.stdexec PRIVATE 
+  $<$<OR:$<COMPILE_LANG_AND_ID:CXX,GNU>,$<COMPILE_LANG_AND_ID:CXX,Clang>>:-ftemplate-backtrace-limit=0>)
 target_link_libraries(test.stdexec
     PUBLIC
     STDEXEC::stdexec
